@@ -1,5 +1,5 @@
 // lib/pages/dashboard_screen.dart
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // <-- INI DIA PERBAIKANNYA
 
 // 1. Import semua halaman "Fragment" Anda
 import 'package:uts_pemmob/pages/biodata_page.dart';
@@ -60,17 +60,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
         // Panggil fungsi _onTabTapped saat tab di-klik
         onTap: _onTabTapped,
 
-        // --- STYLING MODERN & MINIMALIS ---
+        // --- STYLING MODERN & MINIMALIS (Versi perbaikan dari respons saya sebelumnya) ---
 
         // Ini WAJIB untuk 5 item agar semua label terlihat.
-        // Jika tidak, item ke-4 dan ke-5 akan "menghilang".
         type: BottomNavigationBarType.fixed,
 
         // Gunakan warna primer dari Tema Material 3 Anda (di main.dart)
         selectedItemColor: Theme.of(context).colorScheme.primary,
 
-        // Buat item yang tidak aktif menjadi abu-abu
-        unselectedItemColor: Colors.grey[600],
+        // Buat item yang tidak aktif mengambil warna dari tema
+        // Ini akan beradaptasi dengan Light/Dark mode
+        unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
+
+        // Menghilangkan bayangan agar minimalis
+        elevation: 0,
+
+        // Memberi warna latar yang konsisten dengan tema
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
 
         // Sedikit memperkecil font agar terlihat rapi
         selectedFontSize: 12.0,

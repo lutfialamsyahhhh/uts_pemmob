@@ -7,66 +7,66 @@ class CuacaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Ambil tema saat ini
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Prakiraan Cuaca")),
-      // Gunakan SingleChildScrollView jika kontennya panjang
+      // AppBar DIHAPUS untuk tampilan yang lebih imersif
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // --- KARTU CUACA UTAMA (Sesuai Gambar [cite: 34-37]) ---
+            // Beri 'padding' atas secara manual karena tidak ada AppBar
+            const SizedBox(height: 48),
+
+            // --- KARTU CUACA UTAMA ---
             Card(
-              elevation: 4,
+              elevation: 0,
+              color: theme.colorScheme.primary, // Warna utama dari tema
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              // 'clipBehavior' agar gradien tidak "bocor"
               clipBehavior: Clip.antiAlias,
-              child: Container(
-                // Hiasan Gradien Modern
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.blue.shade400, Colors.blue.shade700],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
+              child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       "Bandung, ID", // Data Statis
-                      style: TextStyle(
-                        fontSize: 24,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        color: theme.colorScheme.onPrimary,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    // --- GAMBAR CUACA [Poin f] ---
-                    // ! GANTI dengan path gambar cuaca Anda
+
+                    // Animasi Lottie Anda
                     Lottie.asset(
-                      'assets/animations/animasi_petir.json', // <-- GANTI NAMA FILE
+                      'assets/animations/animasi_petir.json',
                       width: 150,
                       height: 150,
                     ),
                     const SizedBox(height: 16),
+
                     Text(
                       "19°", // Data Statis Suhu
-                      style: const TextStyle(
-                        fontSize: 64,
+                      style: theme.textTheme.displayLarge?.copyWith(
+                        color: theme.colorScheme.onPrimary,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "Hujan Petir", // Data Statis
-                      style: TextStyle(fontSize: 20, color: Colors.white70),
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        // --- INI PERBAIKAN PERTAMA ---
+                        // Mengganti .withOpacity(0.8) dengan .withAlpha(204)
+                        color: theme.colorScheme.onPrimary.withAlpha(204),
+                      ),
                     ),
                     const SizedBox(height: 24),
 
-                    // --- INFO TAMBAHAN (Suhu, Kelembapan, dll) [Poin f] ---
+                    // --- INFO TAMBAHAN ---
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -94,13 +94,15 @@ class CuacaPage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // --- PERKIRAAN HARIAN (Contoh Layout Tambahan) ---
-            const Text(
+            // --- PERKIRAAN HARIAN ---
+            Text(
               "Perkiraan Hari Ini",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 16),
-            // 'SizedBox' untuk 'ListView' horizontal
+
             SizedBox(
               height: 140,
               child: ListView(
@@ -125,7 +127,7 @@ class CuacaPage extends StatelessWidget {
                     jam: "16.00",
                     suhu: "22°",
                     icon: Icons.grain,
-                  ), // 'grain' untuk hujan
+                  ),
                   PerkiraanJamCard(
                     jam: "17.00",
                     suhu: "21°",
@@ -141,9 +143,7 @@ class CuacaPage extends StatelessWidget {
   }
 }
 
-// --- WIDGET HELPER ---
-// Ini adalah praktik 'Pro' untuk memecah UI yang berulang
-
+// --- WIDGET HELPER 1 (DESAIN DIPERBARUI) ---
 class InfoCuacaColumn extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -157,16 +157,24 @@ class InfoCuacaColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Ambil tema untuk warna
+    final theme = Theme.of(context);
+
     return Column(
       children: [
-        Icon(icon, color: Colors.white, size: 32),
+        Icon(icon, color: theme.colorScheme.onPrimary, size: 32),
         const SizedBox(height: 8),
-        Text(label, style: const TextStyle(color: Colors.white70)),
+        Text(
+          label,
+          // --- INI PERBAIKAN KEDUA ---
+          // Mengganti .withOpacity(0.8) dengan .withAlpha(204)
+          style: TextStyle(color: theme.colorScheme.onPrimary.withAlpha(204)),
+        ),
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: theme.colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -175,6 +183,7 @@ class InfoCuacaColumn extends StatelessWidget {
   }
 }
 
+// --- WIDGET HELPER 2 (DESAIN DIPERBARUI) ---
 class PerkiraanJamCard extends StatelessWidget {
   final String jam;
   final String suhu;
@@ -188,19 +197,35 @@ class PerkiraanJamCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Ambil tema untuk warna & style
+    final theme = Theme.of(context);
+
     return Card(
-      elevation: 2,
+      elevation: 0,
       margin: const EdgeInsets.only(right: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: theme.colorScheme.outlineVariant),
+      ),
       child: Container(
         width: 100, // Lebar kartu
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(jam, style: const TextStyle(fontWeight: FontWeight.bold)),
-            Icon(icon, color: Colors.blue.shade600, size: 36),
-            Text(suhu, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              jam,
+              style: theme.textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Icon(icon, color: theme.colorScheme.primary, size: 36),
+            Text(
+              suhu,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),

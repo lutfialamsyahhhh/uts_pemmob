@@ -1,7 +1,5 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-// 1. Kita akan segera membuat file 'splash_screen.dart' ini.
-//    Garis merah di bawahnya normal untuk saat ini.
+import 'package:google_fonts/google_fonts.dart'; // 1. Import Google Fonts
 import 'pages/splash_screen.dart';
 
 void main() {
@@ -14,32 +12,43 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Judul aplikasi Anda
       title: 'UTS Pemrograman Mobile',
-
-      // Menghilangkan banner "DEBUG" yang mengganggu di pojok kanan atas
       debugShowCheckedModeBanner: false,
-
-      // Ini adalah kunci untuk tampilan modern (elegan & minimalis)
       theme: ThemeData(
-        // 2. Mengaktifkan Material 3 secara eksplisit
         useMaterial3: true,
 
-        // 3. Tentukan palet warna utama Anda di sini.
-        //    'seedColor' akan secara otomatis menghasilkan skema warna
-        //    (terang & gelap) yang konsisten.
+        // 2. Menggunakan seedColor yang lebih elegan, misal: Indigo
+        // Ini akan secara otomatis menghasilkan skema warna yang konsisten
         colorScheme: ColorScheme.fromSeed(
-          // Ganti 'Colors.blue' dengan warna dasar kampus Anda (Itenas)
-          // atau warna minimalis favorit (misal: Colors.indigo)
-          seedColor: Colors.blue,
-
-          // Anda bisa paksa mode terang/gelap di sini jika mau
-          // brightness: Brightness.light,
+          seedColor: Colors.indigo,
+          brightness: Brightness.light, // Anda bisa paksa mode terang
         ),
+
+        // 3. Mengatur font default untuk seluruh aplikasi
+        // Ini adalah kunci tampilan modern
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+
+        // 4. Memberi sedikit warna pada latar belakang utama
+        // agar Card/Widget terlihat "mengambang"
+        scaffoldBackgroundColor: Colors.indigo[50], // Warna netral
       ),
 
-      // 4. Kita memberi tahu aplikasi bahwa halaman pertama (home)
-      //    yang harus dibuka adalah SplashScreen
+      // Jika Anda ingin tema gelap otomatis yang elegan:
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo, // Gunakan seed yang sama
+          brightness: Brightness.dark, // Paksa mode gelap
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme.apply(
+            bodyColor: Colors.white,
+            displayColor: Colors.white,
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.system, // Otomatis sesuai pengaturan HP
+
       home: const SplashScreen(),
     );
   }

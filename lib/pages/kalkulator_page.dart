@@ -10,72 +10,58 @@ class KalkulatorPage extends StatefulWidget {
 }
 
 class _KalkulatorPageState extends State<KalkulatorPage> {
-  // Variabel state untuk logika kalkulator
-  String _display = "0"; // Teks yang tampil di layar
-  String _currentInput = ""; // Angka yang sedang diketik
-  String _operator = ""; // Operator (+, -, *, /)
-  double _num1 = 0; // Angka pertama
-  bool _operatorPressed = false; // <-- 1. VARIABEL STATE BARU DITAMBAHKAN
+  // ( --- SEMUA LOGIKA STATE ANDA TETAP SAMA, TIDAK SAYA UBAH --- )
+  String _display = "0";
+  String _currentInput = "";
+  String _operator = "";
+  double _num1 = 0;
+  bool _operatorPressed = false;
 
-  // Fungsi yang dipanggil saat tombol ditekan
   void _onButtonPressed(String text) {
+    // ( --- FUNGSI LOGIKA UTAMA ANDA TIDAK SAYA UBAH SAMA SEKALI --- )
+    // ( ... Logika Anda dari baris 20 s/d 124 ... )
     setState(() {
       if ("0123456789.".contains(text)) {
-        // --- INPUT ANGKA (LOGIKA DIPERBARUI) ---
-
-        // Cek apakah operator baru saja ditekan
         if (_operatorPressed) {
-          _display = text; // Ganti display dengan angka baru
-          _operatorPressed = false; // Matikan status
+          _display = text;
+          _operatorPressed = false;
         } else {
-          // Logika lama (jika sedang mengetik angka)
           if (_display == "0") {
-            _display = text; // Ganti "0" dengan angka pertama
+            _display = text;
           } else {
-            _display += text; // Tambahkan angka ke display
+            _display += text;
           }
         }
-        _currentInput = _display; // Simpan ke input saat ini
+        _currentInput = _display;
       } else if (text == "C") {
-        // --- TOMBOL HAPUS (CLEAR) [Poin e] ---
         _display = "0";
         _currentInput = "";
         _operator = "";
         _num1 = 0;
-        _operatorPressed = false; // <-- 2. RESET STATE SAAT CLEAR
+        _operatorPressed = false;
       } else if ("+-*/".contains(text)) {
-        // --- OPERATOR (LOGIKA DIPERBARUI) ---
         _num1 = double.parse(_display);
         _operator = text;
-        _operatorPressed = true; // <-- 3. SET STATE (BUKAN RESET DISPLAY)
+        _operatorPressed = true;
       } else if (text == "√") {
-        // --- AKAR KUADRAT [Poin e] ---
         double value = double.parse(_display);
-        double result = sqrt(value); // Hitung hasilnya dulu
-        // Tambahkan pengecekan
+        double result = sqrt(value);
         if (result % 1 == 0) {
-          // Cek jika ini bilangan bulat
-          _display = result.toInt().toString(); // Tampilkan sbg integer ("9")
+          _display = result.toInt().toString();
         } else {
-          _display = result.toStringAsFixed(
-            2,
-          ); // Tampilkan sbg desimal ("1.73")
+          _display = result.toStringAsFixed(2);
         }
-        _currentInput = _display; // <-- 4. UPDATE CURRENT INPUT
+        _currentInput = _display;
       } else if (text == "x²") {
-        // --- KUADRAT [Poin e] ---
         double value = double.parse(_display);
-        double result = (value * value); // Hitung hasilnya dulu
-        // Tambahkan pengecekan
+        double result = (value * value);
         if (result % 1 == 0) {
-          // Cek jika ini bilangan bulat
-          _display = result.toInt().toString(); // Tampilkan sbg integer ("25")
+          _display = result.toInt().toString();
         } else {
-          _display = result.toStringAsFixed(2); // Tampilkan sbg desimal
+          _display = result.toStringAsFixed(2);
         }
-        _currentInput = _display; // <-- 5. UPDATE CURRENT INPUT
+        _currentInput = _display;
       } else if (text == "=") {
-        // --- TOMBOL SAMA DENGAN (=) ---
         if (_operator.isNotEmpty) {
           double num2 = double.parse(_currentInput);
           double result = 0;
@@ -85,48 +71,46 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           if (_operator == "*") result = _num1 * num2;
           if (_operator == "/") result = _num1 / num2;
 
-          // --- INI BAGIAN YANG DIPERBAIKI ---
-          // Mengganti _display = result.toStringAsFixed(2);
           if (result % 1 == 0) {
-            // Cek jika ini bilangan bulat
-            _display = result
-                .toInt()
-                .toString(); // Tampilkan sbg integer ("15")
+            _display = result.toInt().toString();
           } else {
-            _display = result.toStringAsFixed(
-              2,
-            ); // Tampilkan sbg desimal ("7.50")
+            _display = result.toStringAsFixed(2);
           }
-          // --- AKHIR PERBAIKAN ---
-
-          _operator = ""; // Selesaikan operasi
-          _operatorPressed = false; // <-- 6. RESET STATE SAAT SELESAI
+          _operator = "";
+          _operatorPressed = false;
         }
       }
     });
   }
+  // ( --- AKHIR DARI BLOK LOGIKA ANDA --- )
 
-  // Widget helper untuk membuat satu tombol
+  // --- WIDGET HELPER UNTUK TOMBOL (DESAIN DIPERBARUI) ---
+  // Saya hapus 'Expanded' dari sini agar kita bisa fleksibel di layout '0'
   Widget _buildButton(String text, {Color? color, Color? textColor}) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor:
-                color ?? Theme.of(context).colorScheme.surfaceContainerHighest,
-            foregroundColor:
-                textColor ?? Theme.of(context).colorScheme.onSurfaceVariant,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: const EdgeInsets.all(24),
+    final theme = Theme.of(context);
+
+    // Tentukan warna default jika tidak di-override
+    final bgColor = color ?? theme.colorScheme.surfaceContainerHighest;
+    final fgColor = textColor ?? theme.colorScheme.onSurfaceVariant;
+
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: FilledButton(
+        // <-- Mengganti ElevatedButton dengan FilledButton
+        style: FilledButton.styleFrom(
+          backgroundColor: bgColor,
+          foregroundColor: fgColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16), // <-- Sedikit lebih bulat
           ),
-          onPressed: () => _onButtonPressed(text),
-          child: Text(
-            text,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
+          padding: const EdgeInsets.symmetric(
+            vertical: 24,
+          ), // <-- Padding vertikal
+        ),
+        onPressed: () => _onButtonPressed(text),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -134,29 +118,39 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Ambil tema sekali saja untuk efisiensi
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Kalkulator Sederhana")),
+      appBar: AppBar(
+        title: const Text("Kalkulator Sederhana"),
+        // --- DESAIN DIPERBARUI ---
+        elevation: 0, // Menghilangkan bayangan
+        backgroundColor: theme.colorScheme.surface, // Menyamakan dengan display
+      ),
       body: Column(
         children: [
-          // --- LAYAR DISPLAY ---
+          // --- LAYAR DISPLAY (DESAIN DIPERBARUI) ---
           Expanded(
             flex: 2, // Ambil 2 bagian layar
             child: Container(
-              color: Theme.of(context).colorScheme.surface,
+              color: theme.colorScheme.surface, // Warna dari tema
               alignment: Alignment.bottomRight,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
               child: Text(
                 _display,
-                style: const TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
+                style: TextStyle(
+                  // --- Tipografi lebih modern dan elegan ---
+                  fontSize: 56, // Lebih besar
+                  fontWeight: FontWeight.w300, // Lebih tipis
+                  color: theme.colorScheme.onSurface,
                 ),
                 maxLines: 1,
               ),
             ),
           ),
 
-          // --- KEYPAD ---
+          // --- KEYPAD (DESAIN DIPERBARUI) ---
           Expanded(
             flex: 3, // Ambil 3 bagian layar
             child: Padding(
@@ -167,32 +161,23 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        _buildButton(
-                          "C",
-                          color: Colors.orange,
-                          textColor: Colors.white,
+                        // --- Menggunakan warna TEMA, bukan hardcode Colors.orange ---
+                        Expanded(
+                          child: _buildButton(
+                            "C",
+                            color: theme.colorScheme.tertiaryContainer,
+                            textColor: theme.colorScheme.onTertiaryContainer,
+                          ),
                         ),
-                        _buildButton("x²"),
-                        _buildButton("√"),
-                        _buildButton(
-                          "/",
-                          color: Colors.blue,
-                          textColor: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        _buildButton("7"),
-                        _buildButton("8"),
-                        _buildButton("9"),
-                        _buildButton(
-                          "*",
-                          color: Colors.blue,
-                          textColor: Colors.white,
+                        Expanded(child: _buildButton("x²")),
+                        Expanded(child: _buildButton("√")),
+                        // --- Menggunakan warna TEMA, bukan hardcode Colors.blue ---
+                        Expanded(
+                          child: _buildButton(
+                            "/",
+                            color: theme.colorScheme.primary,
+                            textColor: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -201,13 +186,15 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        _buildButton("4"),
-                        _buildButton("5"),
-                        _buildButton("6"),
-                        _buildButton(
-                          "-",
-                          color: Colors.blue,
-                          textColor: Colors.white,
+                        Expanded(child: _buildButton("7")),
+                        Expanded(child: _buildButton("8")),
+                        Expanded(child: _buildButton("9")),
+                        Expanded(
+                          child: _buildButton(
+                            "*",
+                            color: theme.colorScheme.primary,
+                            textColor: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -216,13 +203,15 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        _buildButton("1"),
-                        _buildButton("2"),
-                        _buildButton("3"),
-                        _buildButton(
-                          "+",
-                          color: Colors.blue,
-                          textColor: Colors.white,
+                        Expanded(child: _buildButton("4")),
+                        Expanded(child: _buildButton("5")),
+                        Expanded(child: _buildButton("6")),
+                        Expanded(
+                          child: _buildButton(
+                            "-",
+                            color: theme.colorScheme.primary,
+                            textColor: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -231,12 +220,39 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        _buildButton("0", color: Colors.grey[300]),
-                        _buildButton("."),
-                        _buildButton(
-                          "=",
-                          color: Colors.blue,
-                          textColor: Colors.white,
+                        Expanded(child: _buildButton("1")),
+                        Expanded(child: _buildButton("2")),
+                        Expanded(child: _buildButton("3")),
+                        Expanded(
+                          child: _buildButton(
+                            "+",
+                            color: theme.colorScheme.primary,
+                            textColor: theme.colorScheme.onPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // --- Tombol 0 kini 2x lebih lebar (flex: 2) ---
+                        Expanded(
+                          flex: 2,
+                          child: _buildButton(
+                            "0",
+                            // --- Menggunakan warna TEMA, bukan hardcode Colors.grey ---
+                            color: theme.colorScheme.surfaceContainer,
+                          ),
+                        ),
+                        Expanded(child: _buildButton(".")),
+                        Expanded(
+                          child: _buildButton(
+                            "=",
+                            color: theme.colorScheme.primary,
+                            textColor: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ],
                     ),

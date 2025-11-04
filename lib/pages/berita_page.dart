@@ -10,27 +10,39 @@ class BeritaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // --- DESAIN DIPERBARUI ---
+    // Kita akan menggunakan CustomScrollView agar bisa memakai
+    // SliverAppBar.large untuk efek judul besar yang modern.
     return Scaffold(
-      // Pasang AppBar di sini agar judulnya spesifik
-      appBar: AppBar(
-        // Judul dari gambar PDF Anda [cite: 40]
-        title: const Text("Favourites."),
-      ),
+      // Kita tidak lagi menggunakan properti 'appBar' di sini.
 
-      // 3. Gunakan ListView.builder untuk membuat daftar
-      body: ListView.builder(
-        // Beri tahu ListView berapa banyak item yang harus dibuat
-        itemCount: dummyNews.length,
+      // 3. Gunakan CustomScrollView sebagai body
+      body: CustomScrollView(
+        slivers: [
+          // 4. Ini adalah AppBar modern kita
+          //    Judul akan besar saat di atas, dan mengecil saat di-scroll
+          SliverAppBar.large(
+            // Judul dari gambar PDF Anda [cite: 40]
+            title: const Text("Favourites."),
+          ),
 
-        // Fungsi ini akan dipanggil untuk setiap item
-        itemBuilder: (context, index) {
-          // Ambil satu artikel berita dari daftar
-          final article = dummyNews[index];
+          // 5. Ini adalah pengganti ListView.builder
+          //    Logikanya 100% sama dengan kode Anda
+          SliverList.builder(
+            // Beri tahu ListView berapa banyak item yang harus dibuat
+            itemCount: dummyNews.length,
 
-          // Kembalikan widget 'NewsCard' kustom kita
-          // dengan data artikel tersebut
-          return NewsCard(article: article);
-        },
+            // Fungsi ini akan dipanggil untuk setiap item
+            itemBuilder: (context, index) {
+              // Ambil satu artikel berita dari daftar
+              final article = dummyNews[index];
+
+              // Kembalikan widget 'NewsCard' kustom kita
+              // dengan data artikel tersebut
+              return NewsCard(article: article);
+            },
+          ),
+        ],
       ),
     );
   }

@@ -11,48 +11,78 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Card adalah widget Material 3 yang modern (elegan, minimalis)
+    // Ambil tema saat ini
+    final theme = Theme.of(context);
+
+    // --- DESAIN DIPERBARUI: MENGGUNAKAN OUTLINED CARD (MINIMALIS) ---
     return Card(
       // Atur margin agar ada jarak antar kartu
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      elevation: 2, // Bayangan tipis
-      clipBehavior: Clip.antiAlias, // Memotong gambar di sudut kartu
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
 
-      // Aksi saat di-klik (saat ini kosong)
+      elevation: 0,
+      clipBehavior: Clip.antiAlias, // Memotong sudut
+      // 2. Menggunakan 'shape' dengan 'side' (garis tepi)
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          // --- INI PERBAIKANNYA ---
+          // Kita hapus .withOpacity(0.5) karena 'outlineVariant'
+          // sudah merupakan warna yang tepat dan halus.
+          color: theme.colorScheme.outlineVariant,
+          // ------------------------
+        ),
+      ),
+
+      // Aksi saat di-klik
       child: InkWell(
-        onTap: () {},
-        // Layout utama: Gambar di kiri, Teks di kanan
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // --- 1. GAMBAR (KIRI) ---
-            SizedBox(
-              width: 120, // Lebar gambar
-              height: 120, // Tinggi gambar (1:1)
-              child: Image.asset(
-                article.imageUrl,
-                fit: BoxFit.cover, // Memastikan gambar memenuhi kotak
-              ),
-            ),
+        onTap: () {
+          // TODO: Tambahkan aksi saat berita di-klik (Komentar ini aman)
+        },
+        child: Padding(
+          // 3. Padding dipindahkan ke sini (di luar Row)
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // --- 1. GAMBAR (KIRI) ---
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  article.imageUrl,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
 
-            // --- 2. TEKS (KANAN) ---
-            // 'Expanded' adalah KUNCI agar teks mengisi
-            // sisa ruang dan tidak 'overflow'
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                // Tumpuk teks secara vertikal
+                  // 5. Menambahkan errorBuilder untuk UI yang robust
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: 100,
+                      height: 100,
+                      color: theme.colorScheme.surfaceContainerHighest,
+                      child: Icon(
+                        Icons.image_not_supported_outlined,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              // Jarak antara gambar dan teks
+              const SizedBox(width: 12),
+
+              // --- 2. TEKS (KANAN) ---
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // JUDUL
                     Text(
                       article.title,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
-                      maxLines: 2, // Batasi 2 baris
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
@@ -60,8 +90,10 @@ class NewsCard extends StatelessWidget {
                     // CUPLIKAN (SNIPPET)
                     Text(
                       article.snippet,
-                      style: Theme.of(context).textTheme.bodySmall,
-                      maxLines: 2, // Batasi 2 baris
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
@@ -73,24 +105,25 @@ class NewsCard extends StatelessWidget {
                         // SUMBER
                         Text(
                           article.source,
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: theme.colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         // TANGGAL
                         Text(
                           article.date,
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
