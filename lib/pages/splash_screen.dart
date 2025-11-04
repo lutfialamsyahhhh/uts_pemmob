@@ -30,66 +30,70 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil tema untuk styling
     final theme = Theme.of(context);
 
     return Scaffold(
-      // --- DESAIN DIPERBARUI ---
-      // 1. Menggunakan scaffoldBackgroundColor (indigo[50] dari tema)
-      //    agar transisi ke dashboard (yang warnanya sama) terlihat mulus.
       backgroundColor: theme.scaffoldBackgroundColor,
 
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // --- 1. FOTO ANDA ---
+            // --- FOTO ANDA ---
             CircleAvatar(
               radius: 80,
-              // 2. Menambahkan warna latar (placeholder) dari tema
               backgroundColor: theme.colorScheme.surfaceContainerHighest,
               backgroundImage: const AssetImage(
                 'assets/images/profile_photo.jpg',
               ),
             ),
-            const SizedBox(height: 24),
 
-            // --- 2. JUDUL APLIKASI ---
+            // 1. Whitespace lebih besar antara Foto dan Teks
+            const SizedBox(height: 32),
+
+            // --- 2. JUDUL APLIKASI (Porta) ---
             Text(
-              "Aplikasi UTS PemMob", // Ganti ini dengan judul Anda
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                // Memastikan warna teks utama
-                color: theme.colorScheme.onSurface,
+              "Porta", // Judul Pilihan Anda
+              // Menggunakan style yang lebih besar (misal: displaySmall)
+              style: theme.textTheme.displaySmall?.copyWith(
+                fontWeight: FontWeight.w600, // Sedikit lebih tebal
+                color: theme.colorScheme.primary, // Memberi warna aksen tema
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+
+            // 2. Whitespace kecil antara Judul dan NIM
+            const SizedBox(height: 8),
 
             // --- 3. NIM ANDA ---
             Text(
               "152023059", // Ganti dengan NIM Anda
+              // Menggunakan style yang lebih kecil
               style: theme.textTheme.titleMedium?.copyWith(
-                // 3. Memberi warna teks sekunder yang elegan
-                color: theme.colorScheme.onSurfaceVariant,
+                color:
+                    theme.colorScheme.onSurfaceVariant, // Warna abu-abu halus
+                fontWeight: FontWeight.normal,
               ),
             ),
+
+            // 3. Whitespace sangat kecil antara NIM dan Nama
+            const SizedBox(height: 4),
 
             // --- 4. NAMA ANDA ---
             Text(
               "Muhammad Lutfi Alamsyah", // Ganti dengan Nama Anda
-              style: theme.textTheme.titleMedium?.copyWith(
-                // 4. Memberi warna teks sekunder yang elegan
-                color: theme.colorScheme.onSurfaceVariant,
+              // Menggunakan style yang sedikit lebih besar dan lebih tebal
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.onSurface,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 48),
 
-            // --- 5. INDIKATOR LOADING (DESAIN DIPERBARUI) ---
-            CircularProgressIndicator(
-              // 5. Memberi warna primary dari tema (indigo)
-              color: theme.colorScheme.primary,
-            ),
+            // 4. Whitespace besar sebelum indikator loading
+            const SizedBox(height: 64),
+
+            // --- INDIKATOR LOADING ---
+            CircularProgressIndicator(color: theme.colorScheme.primary),
           ],
         ),
       ),

@@ -11,94 +11,118 @@ class CuacaPage extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      // AppBar DIHAPUS untuk tampilan yang lebih imersif
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(
+          top: 16.0,
+          bottom: 16.0,
+        ), // Padding vertikal
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Beri 'padding' atas secara manual karena tidak ada AppBar
-            const SizedBox(height: 48),
-
-            // --- KARTU CUACA UTAMA ---
-            Card(
-              elevation: 0,
-              color: theme.colorScheme.primary, // Warna utama dari tema
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+            // --- 1. JUDUL DAN LOKASI (Menggantikan AppBar) ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 32),
+                  Text(
+                    "Bandung, ID",
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Hari ini, 4 Nov 2025",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
               ),
-              clipBehavior: Clip.antiAlias,
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "Bandung, ID", // Data Statis
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+            ),
+            const SizedBox(height: 24),
 
-                    // Animasi Lottie Anda
-                    Lottie.asset(
-                      'assets/animations/animasi_petir.json',
-                      width: 150,
-                      height: 150,
-                    ),
-                    const SizedBox(height: 16),
-
-                    Text(
-                      "19°", // Data Statis Suhu
-                      style: theme.textTheme.displayLarge?.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold,
+            // --- 2. KARTU CUACA UTAMA (DESAIN DIPERBAIKI) ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Card(
+                elevation: 0,
+                // Mengganti warna primary (ungu pekat) dengan warna kontainer yang lebih lembut
+                color: theme.colorScheme.surfaceContainerHighest,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24), // Sudut lebih besar
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 24.0,
+                    bottom: 24.0,
+                  ), // Padding vertikal lebih besar
+                  child: Column(
+                    children: [
+                      // Lottie Animation
+                      Lottie.asset(
+                        'assets/animations/animasi_petir.json',
+                        width: 180, // Sedikit lebih besar
+                        height: 180,
                       ),
-                    ),
-                    Text(
-                      "Hujan Petir", // Data Statis
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        // --- INI PERBAIKAN PERTAMA ---
-                        // Mengganti .withOpacity(0.8) dengan .withAlpha(204)
-                        color: theme.colorScheme.onPrimary.withAlpha(204),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
 
-                    // --- INFO TAMBAHAN ---
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InfoCuacaColumn(
-                          icon: Icons.air,
-                          label: "Angin",
-                          value: "12 km/j",
+                      // Suhu Utama
+                      Text(
+                        "19°",
+                        style: theme.textTheme.displayLarge?.copyWith(
+                          fontSize: 88, // Suhu dibuat sangat besar
+                          fontWeight: FontWeight.w300,
+                          color: theme
+                              .colorScheme
+                              .primary, // Warna utama untuk suhu
                         ),
-                        InfoCuacaColumn(
-                          icon: Icons.water_drop,
-                          label: "Kelembapan",
-                          value: "80%",
+                      ),
+                      Text("Hujan Petir", style: theme.textTheme.titleLarge),
+
+                      const SizedBox(height: 32), // Jarak pemisah lebih besar
+                      // --- INFO TAMBAHAN ---
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            InfoCuacaColumn(
+                              icon: Icons.air,
+                              label: "Angin",
+                              value: "12 km/j",
+                            ),
+                            InfoCuacaColumn(
+                              icon: Icons.water_drop,
+                              label: "Kelembapan",
+                              value: "80%",
+                            ),
+                            InfoCuacaColumn(
+                              icon: Icons.compress,
+                              label: "Tekanan",
+                              value: "1012 hPa",
+                            ),
+                          ],
                         ),
-                        InfoCuacaColumn(
-                          icon: Icons.compress,
-                          label: "Tekanan",
-                          value: "1012 hPa",
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
 
-            const SizedBox(height: 24),
-
-            // --- PERKIRAAN HARIAN ---
-            Text(
-              "Perkiraan Hari Ini",
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 32), // Jarak antar section
+            // --- 3. PERKIRAAN HARIAN HORIZONTAL ---
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                "Perkiraan Jam",
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -106,7 +130,8 @@ class CuacaPage extends StatelessWidget {
             SizedBox(
               height: 140,
               child: ListView(
-                scrollDirection: Axis.horizontal, // Scroll ke samping
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 children: const [
                   PerkiraanJamCard(
                     jam: "13.00",
@@ -136,6 +161,51 @@ class CuacaPage extends StatelessWidget {
                 ],
               ),
             ),
+
+            const SizedBox(height: 32), // Jarak antar section
+            // --- 4. INFORMASI TAMBAHAN: PERKIRAAN 7 HARI (Untuk mengisi 1 halaman) ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                "Perkiraan 7 Hari",
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            // Contoh daftar statis perkiraan 7 hari
+            const PerkiraanHarianRow(
+              day: "Rabu",
+              icon: Icons.cloudy_snowing,
+              tempMin: "18°",
+              tempMax: "25°",
+            ),
+            const PerkiraanHarianRow(
+              day: "Kamis",
+              icon: Icons.thunderstorm_outlined,
+              tempMin: "17°",
+              tempMax: "22°",
+            ),
+            const PerkiraanHarianRow(
+              day: "Jumat",
+              icon: Icons.wb_sunny,
+              tempMin: "20°",
+              tempMax: "27°",
+            ),
+            const PerkiraanHarianRow(
+              day: "Sabtu",
+              icon: Icons.cloud_outlined,
+              tempMin: "19°",
+              tempMax: "24°",
+            ),
+            const PerkiraanHarianRow(
+              day: "Minggu",
+              icon: Icons.wb_sunny,
+              tempMin: "21°",
+              tempMax: "28°",
+            ),
           ],
         ),
       ),
@@ -143,7 +213,7 @@ class CuacaPage extends StatelessWidget {
   }
 }
 
-// --- WIDGET HELPER 1 (DESAIN DIPERBARUI) ---
+// --- WIDGET HELPER 1 (DATA INFO BAWAH KARTU) ---
 class InfoCuacaColumn extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -157,24 +227,20 @@ class InfoCuacaColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil tema untuk warna
     final theme = Theme.of(context);
-
     return Column(
       children: [
-        Icon(icon, color: theme.colorScheme.onPrimary, size: 32),
+        Icon(
+          icon,
+          color: theme.colorScheme.onSurface,
+          size: 28,
+        ), // Warna disesuaikan
         const SizedBox(height: 8),
-        Text(
-          label,
-          // --- INI PERBAIKAN KEDUA ---
-          // Mengganti .withOpacity(0.8) dengan .withAlpha(204)
-          style: TextStyle(color: theme.colorScheme.onPrimary.withAlpha(204)),
-        ),
+        Text(label, style: theme.textTheme.labelMedium),
         const SizedBox(height: 4),
         Text(
           value,
-          style: TextStyle(
-            color: theme.colorScheme.onPrimary,
+          style: theme.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -183,7 +249,7 @@ class InfoCuacaColumn extends StatelessWidget {
   }
 }
 
-// --- WIDGET HELPER 2 (DESAIN DIPERBARUI) ---
+// --- WIDGET HELPER 2 (KARTU JAM HORIZONTAL) ---
 class PerkiraanJamCard extends StatelessWidget {
   final String jam;
   final String suhu;
@@ -197,19 +263,16 @@ class PerkiraanJamCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil tema untuk warna & style
     final theme = Theme.of(context);
 
     return Card(
       elevation: 0,
+      color: theme.colorScheme.surfaceContainer, // Warna lebih gelap dari latar
       margin: const EdgeInsets.only(right: 12),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.colorScheme.outlineVariant),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
-        width: 100, // Lebar kartu
-        padding: const EdgeInsets.all(16.0),
+        width: 80, // Sedikit lebih ramping
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -219,7 +282,7 @@ class PerkiraanJamCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(icon, color: theme.colorScheme.primary, size: 36),
+            Icon(icon, color: theme.colorScheme.primary, size: 32),
             Text(
               suhu,
               style: theme.textTheme.titleMedium?.copyWith(
@@ -227,6 +290,64 @@ class PerkiraanJamCard extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// --- WIDGET HELPER BARU (PERKIRAAN HARIAN) ---
+class PerkiraanHarianRow extends StatelessWidget {
+  final String day;
+  final IconData icon;
+  final String tempMin;
+  final String tempMax;
+
+  const PerkiraanHarianRow({
+    super.key,
+    required this.day,
+    required this.icon,
+    required this.tempMin,
+    required this.tempMax,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    // Gunakan ListTile di dalam Card.outlined agar bersih dan minimalis
+    return Card(
+      elevation: 0,
+      margin: const EdgeInsets.only(bottom: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: theme.colorScheme.outlineVariant),
+      ),
+      child: ListTile(
+        leading: Text(day, style: theme.textTheme.titleMedium),
+        title: Center(
+          child: Icon(icon, color: theme.colorScheme.primary, size: 24),
+        ),
+        trailing: SizedBox(
+          width: 80,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                tempMin,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                tempMax,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

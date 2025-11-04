@@ -1,82 +1,73 @@
 // lib/widgets/news_card.dart
 import 'package:flutter/material.dart';
-import 'package:uts_pemmob/models/news_model.dart'; // Import model Anda
+import 'package:uts_pemmob/models/news_model.dart';
 
-// Ini adalah widget untuk SATU kartu berita
 class NewsCard extends StatelessWidget {
-  // Widget ini menerima satu artikel berita sebagai input
   final NewsArticle article;
 
   const NewsCard({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
-    // Ambil tema saat ini
     final theme = Theme.of(context);
 
-    // --- DESAIN DIPERBARUI: MENGGUNAKAN OUTLINED CARD (MINIMALIS) ---
     return Card(
-      // Atur margin agar ada jarak antar kartu
+      // Konsisten dengan Card.outlined yang minimalis
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-
       elevation: 0,
-      clipBehavior: Clip.antiAlias, // Memotong sudut
-      // 2. Menggunakan 'shape' dengan 'side' (garis tepi)
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
-          // --- INI PERBAIKANNYA ---
-          // Kita hapus .withOpacity(0.5) karena 'outlineVariant'
-          // sudah merupakan warna yang tepat dan halus.
-          color: theme.colorScheme.outlineVariant,
-          // ------------------------
-        ),
+        side: BorderSide(color: theme.colorScheme.outlineVariant),
       ),
 
-      // Aksi saat di-klik
       child: InkWell(
         onTap: () {
-          // TODO: Tambahkan aksi saat berita di-klik (Komentar ini aman)
+          // TODO: Tambahkan aksi saat berita di-klik
         },
         child: Padding(
-          // 3. Padding dipindahkan ke sini (di luar Row)
           padding: const EdgeInsets.all(12.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // --- 1. GAMBAR (KIRI) ---
+              // --- 1. GAMBAR (UKURAN DIPERBAIKI) ---
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
                   article.imageUrl,
-                  width: 100,
-                  height: 100,
+                  width: 90, // Dibuat sedikit lebih kecil
+                  height: 90,
                   fit: BoxFit.cover,
 
-                  // 5. Menambahkan errorBuilder untuk UI yang robust
+                  // Perbaikan untuk Gambar Error/Placeholder
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      width: 100,
-                      height: 100,
+                      width: 90, // Ukuran harus sama
+                      height: 90,
                       color: theme.colorScheme.surfaceContainerHighest,
-                      child: Icon(
-                        Icons.image_not_supported_outlined,
-                        color: theme.colorScheme.onSurfaceVariant,
+                      child: Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          // Ukuran ikon diperkecil agar tidak terlalu mendominasi
+                          size: 32,
+                          color: theme.colorScheme.onSurfaceVariant.withAlpha(
+                            128,
+                          ),
+                        ),
                       ),
                     );
                   },
                 ),
               ),
 
-              // Jarak antara gambar dan teks
               const SizedBox(width: 12),
 
-              // --- 2. TEKS (KANAN) ---
+              // --- 2. TEKS (Whitespace & Tipografi Diperbaiki) ---
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // JUDUL
+                    // JUDUL UTAMA
                     Text(
                       article.title,
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -85,8 +76,8 @@ class NewsCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
 
+                    const SizedBox(height: 8), // Whitespace
                     // CUPLIKAN (SNIPPET)
                     Text(
                       article.snippet,
@@ -96,9 +87,11 @@ class NewsCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
 
-                    // SUMBER & TANGGAL
+                    const SizedBox(
+                      height: 12,
+                    ), // Whitespace yang lebih besar sebelum footer
+                    // SUMBER & TANGGAL (Footer)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -106,7 +99,7 @@ class NewsCard extends StatelessWidget {
                         Text(
                           article.source,
                           style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.colorScheme.primary,
+                            color: theme.colorScheme.primary, // Warna Aksen
                             fontWeight: FontWeight.bold,
                           ),
                         ),

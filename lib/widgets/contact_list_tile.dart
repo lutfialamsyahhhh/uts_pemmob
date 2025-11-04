@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:uts_pemmob/models/contact_model.dart'; // Import model kontak
 
-// Ini adalah widget kustom untuk satu item kontak
 class ContactListTile extends StatelessWidget {
   final Contact contact;
 
@@ -12,52 +11,57 @@ class ContactListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Kita gunakan ListTile, ini sudah pilihan yang sangat tepat
-    return ListTile(
-      // 'leading' untuk "Circle Image"
-      leading: CircleAvatar(
-        radius: 25, // Ukuran
-        // Menggunakan path gambar dari objek kontak
-        backgroundImage: AssetImage(contact.imageUrl),
+    // 1. Tambahkan Padding untuk memberi spasi di luar item
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      child: ListTile(
+        // 2. Beri 'tileColor' agar menonjol dari latar belakang
+        tileColor: theme.colorScheme.surfaceContainer,
 
-        // Error handling jika gambar gagal dimuat
-        onBackgroundImageError: (exception, stackTrace) {
-          // (Anda bisa biarkan kosong atau tampilkan inisial nama)
-        },
-        // Memberi warna latar placeholder
-        backgroundColor: theme.colorScheme.surfaceContainerHighest,
-      ),
+        // 3. Beri 'shape' agar memiliki sudut membulat (modern)
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
 
-      // 'title' untuk "Teks" Nama
-      title: Text(
-        contact.name,
-        // Menggunakan style dari tema agar konsisten
-        style: theme.textTheme.titleMedium?.copyWith(
-          fontWeight: FontWeight.bold,
+        // --- INI ADALAH BARIS YANG DIHAPUS ---
+        // clipBehavior: Clip.antiAlias, // <-- BARIS INI DIHAPUS
+        // ------------------------------------
+
+        // --- KONTEN LISTTILE ANDA (TETAP SAMA) ---
+
+        // 'leading' untuk "Circle Image"
+        leading: CircleAvatar(
+          radius: 25, // Ukuran
+          backgroundImage: AssetImage(contact.imageUrl),
+          onBackgroundImageError: (exception, stackTrace) {},
+          backgroundColor: theme.colorScheme.surfaceContainerHighest,
         ),
-      ),
 
-      // 'subtitle' untuk "Teks" Telepon
-      subtitle: Text(
-        contact.phone,
-        // Memberi warna yang lebih halus (elegan)
-        style: theme.textTheme.bodyMedium?.copyWith(
+        // 'title' untuk "Teks" Nama
+        title: Text(
+          contact.name,
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        // 'subtitle' untuk "Teks" Telepon
+        subtitle: Text(
+          contact.phone,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
+
+        // 'trailing' (opsional) untuk ikon di kanan
+        trailing: Icon(
+          Icons.chevron_right,
           color: theme.colorScheme.onSurfaceVariant,
         ),
-      ),
 
-      // 'trailing' (opsional) untuk ikon di kanan
-      trailing: Icon(
-        Icons.chevron_right,
-        // --- INI PERBAIKANNYA ---
-        // Kita hapus .withOpacity(0.5)
-        color: theme.colorScheme.onSurfaceVariant,
+        onTap: () {
+          // TODO: Tambahkan aksi saat kontak di-klik
+          // (Peringatan 'TODO' ini aman untuk diabaikan)
+        },
       ),
-
-      onTap: () {
-        // TODO: Tambahkan aksi saat kontak di-klik
-        // (Peringatan 'TODO' ini aman untuk diabaikan)
-      },
     );
   }
 }
