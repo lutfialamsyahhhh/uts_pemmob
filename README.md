@@ -1,69 +1,87 @@
-# Proyek UTS Pemrograman Mobile
-[cite_start]**Institut Teknologi Nasional (Itenas) Bandung** [cite: 2]  
-[cite_start]**Mata Kuliah:** Pemrograman Mobile (IF) [cite: 9, 10]  
-[cite_start]**Dosen:** Galih Ashari R., S.Si., MT [cite: 11]
+# 🚀 PROYEK UTS PEMROGRAMAN MOBILE: APLIKASI PORTA
+
+**Institut Teknologi Nasional (Itenas) Bandung** 
+**SEMESTER GANJIL 2024/2025**
 
 ---
 
-### 👨‍🎓 Identitas Mahasiswa
-* **Nama:** Muhammad Lutfi Alamsyah
-* **NIM:** 152023059
-* [cite_start]**Kelas:** [Isi Kelas Anda, misal: AA/BB] [cite: 11]
+### 🎓 Informasi Akademik
 
-### 📝 Deskripsi Proyek
-[cite_start]Ini adalah proyek aplikasi mobile yang dikembangkan untuk memenuhi Ujian Tengah Semester (UTS) Ganjil 2024/2025[cite: 8]. Aplikasi ini dibangun menggunakan Flutter dengan desain Material 3 yang modern, elegan, dan minimalis.
-
-Aplikasi ini mencakup fungsionalitas dasar yang diwajibkan oleh soal, seperti *splash screen*, navigasi, dan beberapa halaman fitur statis.
-
-### ✨ Fitur Aplikasi
-Aplikasi ini terdiri dari beberapa halaman utama:
-
-1.  [cite_start]**Splash Screen:** Halaman pembuka yang tampil selama 5 detik, menampilkan foto, nama, dan NIM[cite: 14].
-2.  [cite_start]**Dashboard:** Halaman utama dengan 5 menu yang diakses melalui **Bottom Navigation Bar**[cite: 15]. [cite_start]Semua halaman menu diimplementasikan sebagai *Fragment* (Widgets)[cite: 16].
-3.  [cite_start]**Halaman Biodata:** Menampilkan profil statis beserta *form* input yang fungsional, mencakup `TextFormField`, `RadioListTile`, `DropdownButtonFormField`, dan `DatePicker` (Kalender)[cite: 18].
-4.  [cite_start]**Halaman Kontak:** Menampilkan daftar 15+ kontak statis menggunakan pola berulang (`SliverList.builder` dan `ContactListTile`)[cite: 20, 21].
-5.  [cite_start]**Halaman Kalkulator:** Kalkulator sederhana yang fungsional untuk operasi tambah, kurang, kali, bagi, kuadrat, dan akar kuadrat[cite: 32].
-6.  [cite_start]**Halaman Cuaca:** Halaman UI statis yang menampilkan kondisi cuaca dengan desain modern dan animasi Lottie (`animasi_petir.json`)[cite: 33].
-7.  [cite_start]**Halaman Berita:** Menampilkan daftar berita statis menggunakan pola berulang (`SliverList.builder` dan `NewsCard`), konsisten dengan Halaman Kontak[cite: 38].
+| Keterangan | Detail |
+| :--- | :--- |
+| **Mata Kuliah** | Pemrograman Mobile |
+| **Program Studi** | Informatika |
+| **Dosen Pengampu** | Galih Ashari R., S.Si., MT |
+| **Nama Mahasiswa** | Muhammad Lutfi Alamsyah |
+| **NIM** | 152023059 |
+| **Kelas** | AA |
 
 ---
 
-## 📸 Tangkapan Layar Aplikasi
-[cite_start]Berikut adalah tangkapan layar (screenshot) dari semua halaman yang telah dikembangkan, sesuai dengan petunjuk pengerjaan.
+## ✅ JAWABAN SOAL NO. 1: DESKRIPSI PROYEK (ABOUT)
 
-### 1. Splash Screen & Navigasi Dashboard
-[Sisipkan Screenshot Splash Screen di sini]
-<br>
-[Sisipkan Screenshot Halaman Dashboard (salah satu menu aktif) di sini]
-*(Deskripsi: Splash screen 5 detik dan halaman utama dengan Bottom Navigation Bar.)*
+Aplikasi **Porta** dikembangkan menggunakan Flutter dan Dart, dengan penerapan desain **Material 3** yang fokus pada *User Interface* dan *User Experience* (UI/UX) yang modern, minimalis, dan konsisten di seluruh halaman.
 
-### 2. Halaman Biodata
-[Sisipkan Screenshot Halaman Biodata (scroll ke atas) di sini]
-<br>
-[Sisipkan Screenshot Halaman Biodata (scroll ke bawah, tampilkan form) di sini]
-[cite_start]*(Deskripsi: Halaman profil dan form input untuk alamat, jenis kelamin, prodi, dan tanggal lahir.)* [cite: 18]
+Proyek ini telah memenuhi seluruh ketentuan yang dipersyaratkan oleh UTS:
 
-### 3. Halaman Kontak
-[Sisipkan Screenshot Halaman Kontak (tampilkan daftar) di sini]
-[cite_start]*(Deskripsi: Halaman daftar kontak dengan judul besar (SliverAppBar) dan layout Circle Image + Teks.)* [cite: 20]
+### ✨ Implementasi Fitur Utama
 
-### 4. Halaman Berita
-[Sisipkan Screenshot Halaman Berita (tampilkan daftar) di sini]
-[cite_start]*(Deskripsi: Halaman daftar berita dengan layout Card (Outlined) yang konsisten.)* [cite: 38]
+1.  **Splash Screen (Halaman Awal):** Tampil selama **5 detik** dan memuat informasi lengkap (Judul, Foto, NIM, dan Nama).
+2.  **Dashboard:** Menggunakan **Bottom Navigation Bar** sebagai tampilan menu utama.
+3.  **Konsep Fragment:** Semua menu diimplementasikan menggunakan konsep **Fragment** (Widget) dan dapat diakses secara fungsional.
+4.  **Layout Konsisten:** Layout dari keseluruhan menu telah dilengkapi dan diperbaiki untuk memberikan pengalaman pengguna yang baik.
 
-### 5. Halaman Kalkulator
-[Sisipkan Screenshot Halaman Kalkulator di sini]
-[cite_start]*(Deskripsi: Halaman kalkulator sederhana dengan desain tombol yang konsisten dengan tema.)* [cite: 32]
+### 🧩 Detail Halaman (Menu)
 
-### 6. Halaman Cuaca
-[Sisipkan Screenshot Halaman Cuaca (tampilkan kartu utama dan perkiraan) di sini]
-[cite_start]*(Deskripsi: Halaman UI cuaca statis yang menampilkan kartu utama dan daftar perkiraan per jam.)* [cite: 33]
+| Menu | Detail Fungsionalitas | Dasar Persyaratan |
+| :--- | :--- | :--- |
+| **Biodata** | Menampilkan profil statis dan *form* input fungsional, mencakup **Dropdown**, **Radio Button**, dan **Calendar** (Tanggal Lahir). | c) |
+| **Kontak** | Menampilkan daftar **15+ kontak statis** (dari variabel) menggunakan pola tampilan berulang (`ListTile`). | d) |
+| **Kalkulator** | Kalkulator sederhana yang mendukung operasi: Tambah, Kurang, Kali, Bagi, **Kuadrat**, dan **Akar Kuadrat**. | e) |
+| **Cuaca** | Halaman UI statis, menampilkan Suhu, Kelembapan, dan lain-lain, didukung animasi kondisi cuaca yang menarik (Lottie). | f) |
+| **Berita** | Menampilkan daftar berita statis menggunakan **pola tampilan berulang** yang konsisten dengan halaman kontak. | g) |
+
+---
+
+## 📸 Tangkapan Layar (Screenshots)
+
+Berikut adalah visualisasi dari setiap halaman yang telah dikembangkan, mematuhi persyaratan *paparan screenshot* dari semua halaman:
+
+### 1. Tampilan Utama & Navigasi
+
+| Splash Screen (5 Detik) | Navigasi Dashboard (Halaman Biodata Aktif) |
+| :---: | :---: |
+| **<img width="411" height="911" alt="Screenshot 2025-11-12 185022" src="https://github.com/user-attachments/assets/2fbb7ed8-5ac8-4227-a4dc-9d45d52c0d2e" />** | **<img width="408" height="54" alt="Screenshot 2025-11-12 185904" src="https://github.com/user-attachments/assets/b7ea7e7a-7355-4076-a8d3-b20e945e2c62" />** |
+
+### 2. Halaman Biodata (Form Input)
+
+| Tampilan Lengkap (Profil dan Input) |
+| :---: |
+| **<img width="405" height="908" alt="image" src="https://github.com/user-attachments/assets/fa80f7e5-56f3-434e-ab82-b1c4559bc3d3" />** |
+
+*Deskripsi: Halaman Biodata memuat form input fungsional untuk alamat, jenis kelamin, prodi, dan tanggal lahir*.
+
+### 3. Halaman Daftar Data (List Pattern)
+
+| Halaman Kontak (List Tile) | Halaman Berita (News Card) |
+| :---: | :---: |
+| **<img width="402" height="906" alt="image" src="https://github.com/user-attachments/assets/24fac81c-7ad2-413c-a48c-429720094720" />** | **<img width="406" height="906" alt="image" src="https://github.com/user-attachments/assets/d6d4170a-cd15-4dda-a3b3-2d2aef9f4ad5" />** |
+
+*Deskripsi: Kedua halaman menggunakan pola berulang yang rapi dan konsisten, masing-masing dengan list kontak dan list artikel berita*.
+
+### 4. Halaman Utilitas
+
+| Halaman Kalkulator | Halaman Cuaca |
+| :---: | :---: |
+| **<img width="404" height="906" alt="image" src="https://github.com/user-attachments/assets/5144cdf7-c5b6-40bd-8ba3-c2d96146cc39" />** | **<img width="404" height="913" alt="image" src="https://github.com/user-attachments/assets/82ed48ef-84de-4968-955f-e2d2f838ec59" />** |
+
+*Deskripsi: Kalkulator fungsional mendukung Kuadrat dan Akar Kuadrat. Halaman Cuaca statis menampilkan kondisi dan animasi cuaca yang menarik.*
 
 ---
 
 ### 🛠️ Teknologi yang Digunakan
-* **Framework:** Flutter
+* **Framework:** Flutter (Stabil Channel)
 * **Bahasa:** Dart
-* **Desain:** Material 3 (dengan tema global `ColorScheme.fromSeed`)
-* **Animasi:** `lottie` (untuk animasi cuaca)
-* **Font:** `google_fonts` (Poppins)
+* **Desain:** Material 3 (Tema Dinamis dan Konsisten)
+* **Animasi:** `lottie` (untuk kondisi cuaca)
+* **Aset:** Grafis vektor untuk ikon dan gambar *placeholder*.
