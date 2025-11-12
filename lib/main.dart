@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // 1. Import Google Fonts
+import 'package:google_fonts/google_fonts.dart';
 import 'pages/splash_screen.dart';
 
 void main() {
@@ -17,28 +17,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
 
-        // 2. Menggunakan seedColor yang lebih elegan, misal: Indigo
-        // Ini akan secara otomatis menghasilkan skema warna yang konsisten
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
-          brightness: Brightness.light, // Anda bisa paksa mode terang
+          brightness: Brightness.light,
         ),
 
-        // 3. Mengatur font default untuk seluruh aplikasi
-        // Ini adalah kunci tampilan modern
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
 
-        // 4. Memberi sedikit warna pada latar belakang utama
-        // agar Card/Widget terlihat "mengambang"
-        scaffoldBackgroundColor: Colors.indigo[50], // Warna netral
+        scaffoldBackgroundColor: Colors.indigo[50],
       ),
 
-      // Jika Anda ingin tema gelap otomatis yang elegan:
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo, // Gunakan seed yang sama
-          brightness: Brightness.dark, // Paksa mode gelap
+          seedColor: Colors.indigo,
+          brightness: Brightness.dark,
         ),
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme.apply(
@@ -47,7 +40,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      themeMode: ThemeMode.system, // Otomatis sesuai pengaturan HP
+      themeMode: ThemeMode.system,
 
       home: const SplashScreen(),
     );

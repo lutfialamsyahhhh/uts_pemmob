@@ -1,6 +1,5 @@
-// lib/pages/kalkulator_page.dart
 import 'package:flutter/material.dart';
-import 'dart:math'; // Import 'math' untuk fungsi 'sqrt' (akar)
+import 'dart:math';
 
 class KalkulatorPage extends StatefulWidget {
   const KalkulatorPage({super.key});
@@ -10,7 +9,6 @@ class KalkulatorPage extends StatefulWidget {
 }
 
 class _KalkulatorPageState extends State<KalkulatorPage> {
-  // --- (SEMUA LOGIKA STATE ANDA TETAP SAMA, TIDAK SAYA UBAH) ---
   String _display = "0";
   String _currentInput = "";
   String _operator = "";
@@ -18,8 +16,6 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
   bool _operatorPressed = false;
 
   void _onButtonPressed(String text) {
-    // ( ... Logika Anda dari respons-respons sebelumnya ... )
-    // ( ... (Saya salin lagi di bawah agar lengkap) ... )
     setState(() {
       if ("0123456789.".contains(text)) {
         if (_operatorPressed) {
@@ -29,7 +25,6 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           if (_display == "0" && text != ".") {
             _display = text;
           } else if (_display.contains('.') && text == '.') {
-            // Mencegah ada dua titik desimal
             return;
           } else {
             _display += text;
@@ -43,10 +38,9 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
         _num1 = 0;
         _operatorPressed = false;
       } else if ("+-*/".contains(text)) {
-        // Cek jika operator ditekan beruntun, selesaikan dulu yg lama
         if (_operator.isNotEmpty && !_operatorPressed) {
           _onButtonPressed("=");
-          _operatorPressed = true; // Langsung set true
+          _operatorPressed = true;
         }
         _num1 = double.parse(_display);
         _operator = text;
@@ -79,7 +73,7 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           if (_operator == "*") result = _num1 * num2;
           if (_operator == "/") {
             if (num2 == 0) {
-              _display = "Error"; // Mencegah pembagian oleh nol
+              _display = "Error";
               return;
             }
             result = _num1 / num2;
@@ -92,14 +86,13 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           }
           _operator = "";
           _operatorPressed = false;
-          _currentInput = _display; // Simpan hasil untuk operasi selanjutnya
-          _num1 = result; // Simpan hasil
+          _currentInput = _display;
+          _num1 = result;
         }
       }
     });
   }
 
-  // --- (WIDGET HELPER ANDA TETAP SAMA) ---
   Widget _buildButton(String text, {Color? color, Color? textColor}) {
     final theme = Theme.of(context);
     final bgColor = color ?? theme.colorScheme.surfaceContainerHighest;
@@ -125,34 +118,22 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
     );
   }
 
-  // --- PERBAIKAN DESAIN ADA DI SINI (WIDGET BUILD) ---
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
-      // 1. HAPUS 'appBar' standar
-
-      // 2. GANTI 'body: Column' dengan 'body: CustomScrollView'
       body: CustomScrollView(
         slivers: [
-          // 3. TAMBAHKAN 'SliverAppBar.large' agar konsisten
-          const SliverAppBar.large(
-            title: Text("Kalkulator"), // Judul disamakan
-          ),
+          const SliverAppBar.large(title: Text("Kalkulator")),
 
-          // 4. TAMBAHKAN 'SliverFillRemaining'
-          // Ini akan mengisi sisa layar TANPA bisa di-scroll
           SliverFillRemaining(
-            hasScrollBody: false, // Penting!
+            hasScrollBody: false,
             child: Column(
               children: [
-                // --- LAYAR DISPLAY (PROPORSI DIPERBAIKI) ---
                 Expanded(
-                  // 5. Ubah flex dari 2 menjadi 1 (lebih kecil)
                   flex: 1,
                   child: Container(
-                    // Latar display disamakan dengan latar scaffold
                     color: theme.scaffoldBackgroundColor,
                     alignment: Alignment.bottomRight,
                     padding: const EdgeInsets.symmetric(
@@ -171,14 +152,10 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                   ),
                 ),
 
-                // --- KEYPAD (PROPORSI DIPERBAIKI) ---
                 Expanded(
-                  // 6. Ubah flex dari 3 menjadi 2 (lebih besar)
-                  // Rasio baru 1:2 (Display:Keypad)
                   flex: 2,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    // (Logika layout tombol Anda tetap sama)
                     child: Column(
                       children: [
                         Expanded(
@@ -261,7 +238,7 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Expanded(
-                                flex: 2, // Tombol 0 2x lebih lebar
+                                flex: 2,
                                 child: _buildButton(
                                   "0",
                                   color: theme.colorScheme.surfaceContainer,

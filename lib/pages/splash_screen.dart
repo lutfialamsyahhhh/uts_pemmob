@@ -1,5 +1,4 @@
-// lib/pages/splash_screen.dart
-import 'dart:async'; // Diperlukan untuk 'Timer'
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:uts_pemmob/pages/dashboard_screen.dart';
 
@@ -11,7 +10,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // --- Logika Timer Anda (Sudah Sempurna, Tidak Diubah) ---
   @override
   void initState() {
     super.initState();
@@ -19,14 +17,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   startSplashScreenTimer() {
-    const duration = Duration(seconds: 5); // Sesuai Poin (a)
+    const duration = Duration(seconds: 5);
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const DashboardScreen()),
       );
     });
   }
-  // --- Akhir Logika Timer ---
 
   @override
   Widget build(BuildContext context) {
@@ -48,51 +45,39 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
 
-            // 1. Whitespace lebih besar antara Foto dan Teks
             const SizedBox(height: 32),
 
-            // --- 2. JUDUL APLIKASI (Porta) ---
             Text(
-              "Porta", // Judul Pilihan Anda
-              // Menggunakan style yang lebih besar (misal: displaySmall)
+              "PORTA",
               style: theme.textTheme.displaySmall?.copyWith(
-                fontWeight: FontWeight.w600, // Sedikit lebih tebal
-                color: theme.colorScheme.primary, // Memberi warna aksen tema
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.primary,
               ),
               textAlign: TextAlign.center,
             ),
 
-            // 2. Whitespace kecil antara Judul dan NIM
             const SizedBox(height: 8),
 
-            // --- 3. NIM ANDA ---
             Text(
-              "152023059", // Ganti dengan NIM Anda
-              // Menggunakan style yang lebih kecil
+              "152023059",
               style: theme.textTheme.titleMedium?.copyWith(
-                color:
-                    theme.colorScheme.onSurfaceVariant, // Warna abu-abu halus
+                color: theme.colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.normal,
               ),
             ),
 
-            // 3. Whitespace sangat kecil antara NIM dan Nama
             const SizedBox(height: 4),
 
-            // --- 4. NAMA ANDA ---
             Text(
-              "Muhammad Lutfi Alamsyah", // Ganti dengan Nama Anda
-              // Menggunakan style yang sedikit lebih besar dan lebih tebal
+              "Muhammad Lutfi Alamsyah",
               style: theme.textTheme.titleLarge?.copyWith(
                 color: theme.colorScheme.onSurface,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
-            // 4. Whitespace besar sebelum indikator loading
             const SizedBox(height: 64),
 
-            // --- INDIKATOR LOADING ---
             CircularProgressIndicator(color: theme.colorScheme.primary),
           ],
         ),

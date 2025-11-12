@@ -1,32 +1,55 @@
-// lib/models/contact_model.dart
-
-// 1. Ini adalah "Blueprint" atau Class Model untuk satu kontak
-// Ini mendefinisikan data apa saja yang dimiliki oleh sebuah kontak.
 class Contact {
   final String name;
   final String phone;
   final String imageUrl; // Path ke gambar di folder assets/images/
 
-  // Ini adalah constructor-nya
   Contact({required this.name, required this.phone, required this.imageUrl});
 }
 
-// 2. Ini adalah "Data Statis dari Variabel" yang diminta oleh Poin (d)
-// Kita buat sebuah List (daftar) berisi 15+ objek Contact.
-
-// ! GANTI 'assets/images/profile_photo.jpg' dengan path foto Anda
-// ! GANTI 'assets/images/avatar_placeholder.png' dengan path gambar placeholder
-//   (yang akan kita tambahkan di Langkah 4.2)
-
 final List<Contact> dummyContacts = [
   Contact(
-    name: "Muhammad Lutfi Alamsyah", // Ganti dengan nama Anda
-    phone: "+62 812 3456 7890",
-    imageUrl: "assets/images/profile_photo.jpg", // Foto Anda dari Splash Screen
+    name: "Dosen Galih Ashari R.",
+    phone: "+62 811 2233 4455",
+    imageUrl: "assets/images/avatar_placeholder.png",
   ),
   Contact(
-    name: "Dosen Galih Ashari R.", // Ganti sesuai data
-    phone: "+62 811 2233 4455",
+    name: "Reza IF 23",
+    phone: "+62 822 3456 3537",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Hikaru IF 23",
+    phone: "+62 855 0538 8336",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Indra IF 23",
+    phone: "+62 857 3935 5372",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Gamma IF 23",
+    phone: "+62 857 3957 6637",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Opik IF 23",
+    phone: "+62 857 3322 4374",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Aqil IF 23",
+    phone: "+62 857 3356 3395",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Roji IF 23",
+    phone: "+62 857 4363 3655",
+    imageUrl: "assets/images/avatar_placeholder.png",
+  ),
+  Contact(
+    name: "Razziq IF 23",
+    phone: "+62 857 3634 6635",
     imageUrl: "assets/images/avatar_placeholder.png",
   ),
   Contact(
@@ -44,8 +67,6 @@ final List<Contact> dummyContacts = [
     phone: "+62 814 3333 4444",
     imageUrl: "assets/images/avatar_placeholder.png",
   ),
-  // --- Tugas Anda: Salin (Copy) blok 'Contact' di atas ---
-  // --- dan buat lagi 10 kontak di bawah ini agar totalnya 15 ---
   Contact(
     name: "Eko Prasetyo",
     phone: "+62 815 4444 5555",
@@ -56,18 +77,9 @@ final List<Contact> dummyContacts = [
     phone: "+62 816 5555 6666",
     imageUrl: "assets/images/avatar_placeholder.png",
   ),
-  // (Lanjutkan...)
-  // ...
-  // ...
-  // ...
-  // ...
-  // ...
-  // ...
-  // ...
-  // ...
   Contact(
-    name: "Kontak ke-15",
-    phone: "+62 819 9999 0000",
+    name: "Rangga Raja",
+    phone: "+62 819 2522 5346",
     imageUrl: "assets/images/avatar_placeholder.png",
   ),
 ];

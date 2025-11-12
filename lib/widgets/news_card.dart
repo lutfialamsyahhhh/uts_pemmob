@@ -1,4 +1,3 @@
-// lib/widgets/news_card.dart
 import 'package:flutter/material.dart';
 import 'package:uts_pemmob/models/news_model.dart';
 
@@ -12,7 +11,6 @@ class NewsCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Card(
-      // Konsisten dengan Card.outlined yang minimalis
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -30,25 +28,22 @@ class NewsCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // --- 1. GAMBAR (UKURAN DIPERBAIKI) ---
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
                   article.imageUrl,
-                  width: 90, // Dibuat sedikit lebih kecil
+                  width: 90,
                   height: 90,
                   fit: BoxFit.cover,
 
-                  // Perbaikan untuk Gambar Error/Placeholder
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      width: 90, // Ukuran harus sama
+                      width: 90,
                       height: 90,
                       color: theme.colorScheme.surfaceContainerHighest,
                       child: Center(
                         child: Icon(
                           Icons.image_not_supported_outlined,
-                          // Ukuran ikon diperkecil agar tidak terlalu mendominasi
                           size: 32,
                           color: theme.colorScheme.onSurfaceVariant.withAlpha(
                             128,
@@ -62,12 +57,10 @@ class NewsCard extends StatelessWidget {
 
               const SizedBox(width: 12),
 
-              // --- 2. TEKS (Whitespace & Tipografi Diperbaiki) ---
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // JUDUL UTAMA
                     Text(
                       article.title,
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -77,8 +70,7 @@ class NewsCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
 
-                    const SizedBox(height: 8), // Whitespace
-                    // CUPLIKAN (SNIPPET)
+                    const SizedBox(height: 8),
                     Text(
                       article.snippet,
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -88,22 +80,17 @@ class NewsCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
 
-                    const SizedBox(
-                      height: 12,
-                    ), // Whitespace yang lebih besar sebelum footer
-                    // SUMBER & TANGGAL (Footer)
+                    const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // SUMBER
                         Text(
                           article.source,
                           style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.colorScheme.primary, // Warna Aksen
+                            color: theme.colorScheme.primary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        // TANGGAL
                         Text(
                           article.date,
                           style: theme.textTheme.labelMedium?.copyWith(

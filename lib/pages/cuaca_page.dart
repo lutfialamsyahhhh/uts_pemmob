@@ -1,4 +1,3 @@
-// lib/pages/cuaca_page.dart
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -7,19 +6,14 @@ class CuacaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil tema saat ini
     final theme = Theme.of(context);
 
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          top: 16.0,
-          bottom: 16.0,
-        ), // Padding vertikal
+        padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // --- 1. JUDUL DAN LOKASI (Menggantikan AppBar) ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
@@ -27,7 +21,7 @@ class CuacaPage extends StatelessWidget {
                 children: [
                   const SizedBox(height: 32),
                   Text(
-                    "Bandung, ID",
+                    "Kota Bandung",
                     style: theme.textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.onSurface,
@@ -35,7 +29,7 @@ class CuacaPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Hari ini, 4 Nov 2025",
+                    "Selasa, 4 Nov 2025",
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
@@ -45,46 +39,37 @@ class CuacaPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // --- 2. KARTU CUACA UTAMA (DESAIN DIPERBAIKI) ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Card(
                 elevation: 0,
-                // Mengganti warna primary (ungu pekat) dengan warna kontainer yang lebih lembut
                 color: theme.colorScheme.surfaceContainerHighest,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24), // Sudut lebih besar
+                  borderRadius: BorderRadius.circular(24),
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 24.0,
-                    bottom: 24.0,
-                  ), // Padding vertikal lebih besar
+                  padding: const EdgeInsets.only(top: 24.0, bottom: 24.0),
                   child: Column(
                     children: [
                       // Lottie Animation
                       Lottie.asset(
                         'assets/animations/animasi_petir.json',
-                        width: 180, // Sedikit lebih besar
+                        width: 180,
                         height: 180,
                       ),
 
-                      // Suhu Utama
                       Text(
                         "19°",
                         style: theme.textTheme.displayLarge?.copyWith(
-                          fontSize: 88, // Suhu dibuat sangat besar
+                          fontSize: 88,
                           fontWeight: FontWeight.w300,
-                          color: theme
-                              .colorScheme
-                              .primary, // Warna utama untuk suhu
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                       Text("Hujan Petir", style: theme.textTheme.titleLarge),
 
-                      const SizedBox(height: 32), // Jarak pemisah lebih besar
-                      // --- INFO TAMBAHAN ---
+                      const SizedBox(height: 32),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(
@@ -114,8 +99,7 @@ class CuacaPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 32), // Jarak antar section
-            // --- 3. PERKIRAAN HARIAN HORIZONTAL ---
+            const SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
@@ -158,12 +142,21 @@ class CuacaPage extends StatelessWidget {
                     suhu: "21°",
                     icon: Icons.wb_cloudy,
                   ),
+                  PerkiraanJamCard(
+                    jam: "18.00",
+                    suhu: "19°",
+                    icon: Icons.grain,
+                  ),
+                  PerkiraanJamCard(
+                    jam: "19.00",
+                    suhu: "18°",
+                    icon: Icons.grain,
+                  ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 32), // Jarak antar section
-            // --- 4. INFORMASI TAMBAHAN: PERKIRAAN 7 HARI (Untuk mengisi 1 halaman) ---
+            const SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -175,7 +168,6 @@ class CuacaPage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            // Contoh daftar statis perkiraan 7 hari
             const PerkiraanHarianRow(
               day: "Rabu",
               icon: Icons.cloudy_snowing,
@@ -206,6 +198,18 @@ class CuacaPage extends StatelessWidget {
               tempMin: "21°",
               tempMax: "28°",
             ),
+            const PerkiraanHarianRow(
+              day: "Senin",
+              icon: Icons.thunderstorm_outlined,
+              tempMin: "16°",
+              tempMax: "21°",
+            ),
+            const PerkiraanHarianRow(
+              day: "Selasa",
+              icon: Icons.cloudy_snowing,
+              tempMin: "19°",
+              tempMax: "26°",
+            ),
           ],
         ),
       ),
@@ -213,7 +217,6 @@ class CuacaPage extends StatelessWidget {
   }
 }
 
-// --- WIDGET HELPER 1 (DATA INFO BAWAH KARTU) ---
 class InfoCuacaColumn extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -230,11 +233,7 @@ class InfoCuacaColumn extends StatelessWidget {
     final theme = Theme.of(context);
     return Column(
       children: [
-        Icon(
-          icon,
-          color: theme.colorScheme.onSurface,
-          size: 28,
-        ), // Warna disesuaikan
+        Icon(icon, color: theme.colorScheme.onSurface, size: 28),
         const SizedBox(height: 8),
         Text(label, style: theme.textTheme.labelMedium),
         const SizedBox(height: 4),
@@ -249,7 +248,6 @@ class InfoCuacaColumn extends StatelessWidget {
   }
 }
 
-// --- WIDGET HELPER 2 (KARTU JAM HORIZONTAL) ---
 class PerkiraanJamCard extends StatelessWidget {
   final String jam;
   final String suhu;
@@ -267,11 +265,11 @@ class PerkiraanJamCard extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      color: theme.colorScheme.surfaceContainer, // Warna lebih gelap dari latar
+      color: theme.colorScheme.surfaceContainer,
       margin: const EdgeInsets.only(right: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
-        width: 80, // Sedikit lebih ramping
+        width: 80,
         padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -296,7 +294,6 @@ class PerkiraanJamCard extends StatelessWidget {
   }
 }
 
-// --- WIDGET HELPER BARU (PERKIRAAN HARIAN) ---
 class PerkiraanHarianRow extends StatelessWidget {
   final String day;
   final IconData icon;
@@ -315,7 +312,6 @@ class PerkiraanHarianRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Gunakan ListTile di dalam Card.outlined agar bersih dan minimalis
     return Card(
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 8),

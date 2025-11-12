@@ -1,4 +1,3 @@
-// lib/pages/biodata_page.dart
 import 'package:flutter/material.dart';
 
 class BiodataPage extends StatefulWidget {
@@ -9,7 +8,6 @@ class BiodataPage extends StatefulWidget {
 }
 
 class _BiodataPageState extends State<BiodataPage> {
-  // --- Variabel State (Logika fungsional dari sebelumnya) ---
   String? _jenisKelamin = 'Laki-laki';
   String? _programStudi = 'Informatika';
   final List<String> _prodiOptions = [
@@ -22,7 +20,6 @@ class _BiodataPageState extends State<BiodataPage> {
 
   final TextEditingController _tanggalController = TextEditingController();
 
-  // --- Fungsi Kalender (Logika fungsional dari sebelumnya) ---
   Future<void> _pilihTanggal(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -48,24 +45,19 @@ class _BiodataPageState extends State<BiodataPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil tema untuk styling
     final theme = Theme.of(context);
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // --- 1. AppBar (Sudah Bagus di Screenshot Anda) ---
           const SliverAppBar.large(title: Text("Biodata")),
 
-          // --- 2. Wrapper untuk Konten ---
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.center, // Pusatkan profil
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // --- 3. PROFIL SECTION (Sudah Bagus) ---
                   CircleAvatar(
                     radius: 60,
                     backgroundImage: const AssetImage(
@@ -75,38 +67,33 @@ class _BiodataPageState extends State<BiodataPage> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    "Muhammad Lutfi Alamsyah", // ! GANTI Nama Anda
+                    "Muhammad Lutfi Alamsyah",
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    "3411XXXX", // ! GANTI NIM Anda
+                    "152023059",
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  const SizedBox(height: 24), // Jarak sebelum Card
-                  // --- 4. PERBAIKAN LAYOUT: BUNGKUS FORM DENGAN CARD ---
+                  const SizedBox(height: 24),
                   Card(
-                    // Gunakan Card.outlined agar konsisten dengan NewsCard
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                       side: BorderSide(
-                        // Gunakan warna garis tepi dari tema
                         color: theme.colorScheme.outlineVariant.withAlpha(128),
                       ),
                     ),
                     clipBehavior: Clip.antiAlias,
                     child: Padding(
-                      // Beri padding di DALAM Card
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // --- INPUT TEKS ALAMAT ---
                           TextFormField(
                             decoration: const InputDecoration(
                               labelText: "Alamat",
@@ -116,12 +103,10 @@ class _BiodataPageState extends State<BiodataPage> {
                             maxLines: 3,
                           ),
 
-                          const SizedBox(height: 24), // Jarak antar field
-                          // --- RADIO BUTTON JENIS KELAMIN ---
-                          // (Ini adalah kode fungsional , abaikan 'warning' deprecated)
+                          const SizedBox(height: 24),
                           Text(
                             "Jenis Kelamin",
-                            style: theme.textTheme.bodyLarge, // Label form
+                            style: theme.textTheme.bodyLarge,
                           ),
                           Column(
                             children: [
@@ -150,10 +135,7 @@ class _BiodataPageState extends State<BiodataPage> {
                             ],
                           ),
 
-                          // --- AKHIR RADIO BUTTON ---
-                          const SizedBox(height: 16), // Jarak antar field
-                          // --- DROPDOWN PROGRAM STUDI ---
-                          // (Ini kode fungsional  dengan 'value' yang sudah benar)
+                          const SizedBox(height: 16),
                           DropdownButtonFormField<String>(
                             value: _programStudi,
                             decoration: const InputDecoration(
@@ -173,10 +155,7 @@ class _BiodataPageState extends State<BiodataPage> {
                             },
                           ),
 
-                          // --- AKHIR DROPDOWN ---
-                          const SizedBox(height: 24), // Jarak antar field
-                          // --- CALENDAR TANGGAL LAHIR ---
-                          // (Ini kode fungsional  yang memicu kalender)
+                          const SizedBox(height: 24),
                           TextFormField(
                             controller: _tanggalController,
                             readOnly: true,
@@ -188,12 +167,10 @@ class _BiodataPageState extends State<BiodataPage> {
                             ),
                             onTap: () => _pilihTanggal(context),
                           ),
-                          // --- AKHIR CALENDAR ---
                         ],
                       ),
                     ),
                   ),
-                  // --- AKHIR DARI CARD ---
                 ],
               ),
             ),
