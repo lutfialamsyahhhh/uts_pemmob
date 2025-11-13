@@ -57,7 +57,8 @@ Berikut adalah visualisasi dari setiap halaman yang telah dikembangkan, mematuhi
 
 | Tampilan Lengkap (Profil dan Input) |
 | :---: |
-| **<img width="405" height="908" alt="image" src="https://github.com/user-attachments/assets/fa80f7e5-56f3-434e-ab82-b1c4559bc3d3" />** |
+| **<img width="404" height="906" alt="image" src="https://github.com/user-attachments/assets/f6d9492f-c265-4bf1-a9a5-1b8a3a4f6e82" />
+** |
 
 *Deskripsi: Halaman Biodata memuat form input fungsional untuk alamat, jenis kelamin, prodi, dan tanggal lahir*.
 
@@ -73,7 +74,7 @@ Berikut adalah visualisasi dari setiap halaman yang telah dikembangkan, mematuhi
 
 | Halaman Kalkulator | Halaman Cuaca |
 | :---: | :---: |
-| **<img width="404" height="906" alt="image" src="https://github.com/user-attachments/assets/5144cdf7-c5b6-40bd-8ba3-c2d96146cc39" />** | **<img width="404" height="913" alt="image" src="https://github.com/user-attachments/assets/82ed48ef-84de-4968-955f-e2d2f838ec59" />** |
+| **<img width="404" height="906" alt="image" src="https://github.com/user-attachments/assets/5144cdf7-c5b6-40bd-8ba3-c2d96146cc39" />** | **<img width="404" height="909" alt="image" src="https://github.com/user-attachments/assets/8b4e1f67-04e1-45da-818f-1bae986fc04a" />** |
 
 *Deskripsi: Kalkulator fungsional mendukung Kuadrat dan Akar Kuadrat. Halaman Cuaca statis menampilkan kondisi dan animasi cuaca yang menarik.*
 
